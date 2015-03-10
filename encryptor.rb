@@ -47,4 +47,14 @@ class Encryptor
  		out.close
  	end
 
+ 	def decrypt_file(filename, rotation)
+ 		input = File.open(filename, "r")
+ 		input_string = input.read
+ 		decrypted_string = decrypt(input_string, rotation)
+ 		output_file = filename.gsub("encrypted", "decrypted")
+ 		out = File.open(output_file, "w")
+ 		out.write(decrypted_string)
+ 		out.close
+ 	end
+
 end
