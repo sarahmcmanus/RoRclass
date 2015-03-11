@@ -30,6 +30,7 @@ class Encryptor
  		results.join
  	end
 
+ 	# This seems to work, except it loses line breaks somewhere in encrypt
  	def encrypt_file(filename, rotation)
  	# 1. Create the file handle to the input file
  		input = File.open(filename, "r")
@@ -55,6 +56,16 @@ class Encryptor
  		out = File.open(output_file, "w")
  		out.write(decrypted_string)
  		out.close
+ 	end
+
+ 	def supported_characters
+ 		(' '..'z').to_a
+ 	end
+
+ 	def crack(message)
+ 		supported_characters.count.times.collect do |attempt|
+ 			decrypt(message,attempt)
+ 		end
  	end
 
 end
