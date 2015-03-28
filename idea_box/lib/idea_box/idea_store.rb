@@ -1,12 +1,6 @@
 require 'yaml/store'
 
-class Idea
-  attr_reader :title, :description
-
-  def initialize(attributes)
-    @title = attributes["title"]
-    @description = attributes["description"]
-  end
+class IdeaStore
 
   def self.all
     raw_ideas.map do |data|
@@ -21,18 +15,7 @@ class Idea
   end
 
   def self.database
-    @database ||= YAML::Store.new('ideabox')
-  end
-
-  def database
-    Idea.database
-  end
-
-  def save
-    database.transaction do |db|
-      db['ideas'] ||= []
-      db['ideas'] << {"title" => title, "description" => description}
-    end
+    @database ||= YAML::Store.new('db/ideabox')
   end
 
   def self.delete(position)
@@ -54,6 +37,13 @@ class Idea
   def self.update(id, data)
     database.transaction do
       database['ideas'][id] = data
+    end
+  end
+
+  def self.create(attributes)
+    database.transaction do
+      database['ideas'] ||= []
+      database['ideas'] << attributes
     end
   end
 

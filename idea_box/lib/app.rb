@@ -1,11 +1,11 @@
 # remember to run bundle from terminal to make the realoader work!
 # also rackup -p 4567 will start the server
 
-require './idea'
-require './idea_store'
+require 'idea_box'
 
 class IdeaBoxApp < Sinatra::Base
 	set :method_override, true
+  set :root, 'lib/app'
 
   not_found do
 		erb :error
