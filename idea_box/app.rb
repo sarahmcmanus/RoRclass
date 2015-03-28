@@ -1,7 +1,12 @@
+# remember to run bundle from terminal to make the realoader work!
+# also rackup -p 4567 will start the server
+
 require './idea'
 
 class IdeaBoxApp < Sinatra::Base
-	not_found do
+	set :method_override, true
+
+  not_found do
 		erb :error
 	end
 
@@ -18,4 +23,9 @@ class IdeaBoxApp < Sinatra::Base
     idea.save
     redirect '/'
 	end
+
+  delete '/:id' do |id|
+    Idea.delete(id.to_i)
+    redirect '/'
+  end
 end
