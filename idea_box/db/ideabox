@@ -4,11 +4,19 @@ ideas:
   description: pizza all the time
 - title: exercise
   description: play video games
+  rank: 1
 - title: app
   description: social network for cats
 - title: excursion
   description: take everyone to the zoo
 - title: party
   description: dance all night and all day
+  rank: 1
 - title: ipods for babies
   description: Do you think they should make ipods for babies? Cause I do!
+  rank: 3
+- title: app!
+  description: make all of the features!
+  rank: 2
+- title: learn ruby
+  description: so many gems!
